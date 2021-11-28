@@ -1,1 +1,4 @@
-# README-Generator
+{
+	"projectTitle": "README",
+	"projectDescription": "HI QUALITY"
+}
