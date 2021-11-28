@@ -58,7 +58,7 @@ function init() {
 			}
 		])
 		.then((response) => {
-			writeToFile('README-proj.md', response);
+			writeToFile('Example-README.md', response);
 		});
 
 	// takes user input, generates README markdown and writes a new file

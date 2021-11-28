@@ -1,4 +1,4 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
+// Return a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
 	switch (license) {
@@ -20,7 +20,7 @@ function renderLicenseBadge(license) {
 	}
 }
 
-// Create a function that returns the license link for the table of contents
+// Returns the license link for the table of contents
 // If there is no license, return an empty string so no there's no link in table of contents
 
 function renderLicenseLink(license) {
@@ -31,7 +31,7 @@ function renderLicenseLink(license) {
 	}
 }
 
-// Create a function that returns the description link for the table of contents
+// Returns the description link for the table of contents
 // If there is no description, return an empty string so no there's no link in table of contents
 
 function renderDescriptionLink(description) {
@@ -42,7 +42,7 @@ function renderDescriptionLink(description) {
 	}
 }
 
-// Create a function that returns the description link for the table of contents
+// Returns the description link for the table of contents
 // If there is no description, return an empty string so no there's no link in table of contents
 
 function renderInstallationLink(installation) {
@@ -53,7 +53,7 @@ function renderInstallationLink(installation) {
 	}
 }
 
-// Create a function that returns the usage link for the table of contents
+// Returns the usage link for the table of contents
 // If there is no usage info, return an empty string so no there's no link in table of contents
 
 function renderUsageLink(usage) {
@@ -63,17 +63,18 @@ function renderUsageLink(usage) {
 		return `- [Usage](#usage)`;
 	}
 }
-// Create a function that returns the test Instructions link for the table of contents
-// If there is no test instructions, return an empty string so no there's no link in table of contents
+// Returns the test Instructions link for the table of contents
+// If there are no test instructions, return an empty string so no there's no link in table of contents
 
 function renderTestInstructionsLink(testInstructions) {
-	if (!testInstructions ) {
+	testInstructions = testInstructions.trim();
+	if (testInstructions === "" ) {
 		return ``;
 	} else {
 		return `- [Testing](#testing)`;
 	}
 }
-// Create a function that returns the contribution link for the table of contents
+// Returns the contribution link for the table of contents
 // If there is no contribution, return an empty string so no there's no link in table of contents
 
 function renderContributionLink(contribution) {
@@ -84,7 +85,17 @@ function renderContributionLink(contribution) {
 	}
 }
 
-// Create a function that returns the license section of README
+// Returns the questions link for the table of contents
+// If there is no supplied email or github repository, return an empty string so no there's no link in table of contents
+
+function renderQuestionsLink(email, github) {
+	if (!email && !github) {
+		return ``;
+	} else {
+		return `- [Questions](#questions)`;
+	}
+}
+// Returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
 	if (!license || license === 'None') {
@@ -95,7 +106,7 @@ function renderLicenseSection(license) {
 	}
 }
 
-// Create a function that returns the description section of README
+// Returns the description section of README
 // If there is no description, return an empty string
 function renderDescriptionSection(description) {
 	if (description) {
@@ -106,7 +117,7 @@ function renderDescriptionSection(description) {
 	}
 }
 
-// Create a function that returns the usage section of README
+// Returns the usage section of README
 // If there is no usage, return an empty string
 function renderUsageSection(usage) {
 	if (usage) {
@@ -116,7 +127,7 @@ function renderUsageSection(usage) {
 		return '';
 	}
 }
-// Create a function that returns the contribution section of README
+// Returns the contribution section of README
 // If there is no contriubtion, return an empty string
 function renderContributionSection(contribution) {
 	if (contribution) {
@@ -127,7 +138,7 @@ function renderContributionSection(contribution) {
 	}
 }
 
-// Create a function that returns the installation section of README
+// Returns the installation section of README
 // If there is no installation, return an empty string
 function renderInstallationSection(installation) {
 	if (installation) {
@@ -138,17 +149,34 @@ function renderInstallationSection(installation) {
 	}
 }
 
-// Create a function that returns the test Instructions section of README
+// Returns the test Instructions section of README
 // If there are no test instructions, return an empty string
 function renderTestInstructionsSection(testInstructions) {
-	if (testInstructions) {
+	testInstructions = testInstructions.trim();
+	if (testInstructions != "") {
 		return `## Testing
   ${testInstructions}`;
 	} else {
 		return '';
 	}
 }
-// TODO: Create a function to generate markdown for README
+
+// Returns the Questions section of README
+// If there is no supplied email or github, return an empty string
+function renderQuestionsSection(email, github) {
+	if (!email && !github) {
+		return '';
+	} else {
+		return `## Questions
+  For questions about this project, please contact me by a link below:
+  
+  ${email}
+  
+  www.github.com/${github}
+ `;
+	}
+}
+// Generate markdown for a README file
 function generateMarkdown({
 	title,
 	description,
@@ -163,7 +191,7 @@ function generateMarkdown({
 
 
 
-	//  Return README with all parameters filled in.
+	//  Return README text with all parameters filled in.
 	return `# ${title}
 
 ${renderDescriptionSection(description)}
@@ -181,6 +209,8 @@ ${renderContributionLink(contribution)}
 
 ${renderTestInstructionsLink(testInstructions)}
 
+${renderQuestionsLink(email, github)}
+
 ${renderLicenseLink(license)}
 
 
@@ -192,7 +222,7 @@ ${renderContributionSection(contribution)}
 
 ${renderTestInstructionsSection(testInstructions)}
 
-For questions about this project, please see my GitHub at ${github}, or reach out by email at ${email}.
+${renderQuestionsSection(email,github)}
 
 ${renderLicenseSection(license)}
 `;
